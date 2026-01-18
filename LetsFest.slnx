@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="LetsFest.Data/LetsFest.Data.csproj" Id="8d152016-734f-4f89-85d4-e74ecc221fcf" />
+  <Project Path="letsFest.MysqlData/LetsFest.Mysql.csproj" />
+  <Project Path="LetsFest.Web/LetsFest.Web.csproj" Id="ba27d8d4-3bf7-456d-bd2d-fc7bb0248be1" />
+</Solution>
