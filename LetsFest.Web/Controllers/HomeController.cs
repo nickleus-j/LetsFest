@@ -9,8 +9,8 @@ namespace LetsFest.Web.Controllers
 {
     public class HomeController : Controller
     {
-        ApplicationDbContext dataContext;
-        public HomeController(ApplicationDbContext _context)
+        FestContext dataContext;
+        public HomeController(FestContext _context)
         {
             dataContext = _context;
         }
@@ -25,8 +25,8 @@ namespace LetsFest.Web.Controllers
         }
         public ActionResult CheckRoles()
         {
-           
-            return View(dataContext.EventRoles.ToList());
+            EfWorkUnit efWorkUnit = new EfWorkUnit(dataContext);
+            return View(efWorkUnit.EventRoles.GetStaffRoles());
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

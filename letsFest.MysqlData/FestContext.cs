@@ -4,10 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace LetsFest.Mysql
 {
-    public class FestContext: DbContext,IFestContext
+    public class FestContext: IdentityDbContext, IFestContext
     {
         public FestContext()
         {
