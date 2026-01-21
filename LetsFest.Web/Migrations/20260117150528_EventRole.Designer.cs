@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LetsFest.Web.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(ModelerToDbContext))]
     [Migration("20260117150528_EventRole")]
     partial class EventRole
     {

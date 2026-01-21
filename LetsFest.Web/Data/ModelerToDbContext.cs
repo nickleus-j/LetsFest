@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LetsFest.Web.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ModelerToDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public ModelerToDbContext(DbContextOptions<ModelerToDbContext> options)
             : base(options)
         {
         }
