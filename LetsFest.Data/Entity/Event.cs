@@ -17,14 +17,19 @@ namespace LetsFest.Data.Entity
         public string Title { get; set; }
         public string Description { get; set; }
         [StringLength(40)]
+        [DisplayName("Initiator")]
         public string InitiatorId { get; set; }
         [DefaultValue(true)]
+        [DisplayName("In Use")]
         public Nullable<bool> inUse { get; set; }
         [DefaultValue(true)]
+        [DisplayName("Is Public")]
         public Nullable<bool> isPublic { get; set; }
-
+        [DisplayName("Proposed Start Time")]
         public Nullable<System.DateTime> ProposedStartDateTime { get; set; } = DateTime.UtcNow.AddDays(1);
+        [DisplayName("Proposed End Time")]
         public Nullable<System.DateTime> ProposedEndDateTime { get; set; } = DateTime.UtcNow.AddDays(1).AddHours(1);
+        [DisplayName("Created On")]
         public Nullable<System.DateTime> CreatedOn { get; set; } = DateTime.UtcNow;
 
     }

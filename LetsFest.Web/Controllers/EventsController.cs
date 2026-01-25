@@ -42,10 +42,10 @@ namespace LetsFest.Web.Controllers
             }
             return NotFound();
         }
-        public async Task<IActionResult> EventsOf(int locationId)
+        public async Task<IActionResult> EventsIn(int locationId)
         {
             EfWorkUnit efWorkUnit = new EfWorkUnit(_context);
-            return View(await efWorkUnit.EventRepository.GetEventsOfFutureLocationAsync(locationId));
+            return View("Index", await efWorkUnit.EventRepository.GetEventsOfFutureLocationAsync(locationId));
         }
         // GET: Events/Details/5
         public async Task<IActionResult> Details(long? id)

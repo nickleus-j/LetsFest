@@ -13,8 +13,10 @@ namespace LetsFest.Data.Entity
         [Key]
         public short Id { get;set;}
         [StringLength(300)]
+        [DisplayName("Role Name")]
         public string RoleName { get; set; }
         [DefaultValue(true)]
+        [DisplayName("In Use")]
         public Nullable<bool> inUse { get; set; }
     }
 }
