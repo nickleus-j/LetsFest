@@ -19,7 +19,7 @@ namespace LetsFest.Web.Migrations
                 .HasAnnotation("ProductVersion", "10.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("LetsFest.Data.Dto.Event", b =>
+            modelBuilder.Entity("LetsFest.Data.Entity.Event", b =>
                 {
                     b.Property<long>("EventID")
                         .ValueGeneratedOnAdd()
@@ -64,7 +64,7 @@ namespace LetsFest.Web.Migrations
                     b.ToTable("Event");
                 });
 
-            modelBuilder.Entity("LetsFest.Data.Dto.EventParticipation", b =>
+            modelBuilder.Entity("LetsFest.Data.Entity.EventParticipation", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -89,7 +89,7 @@ namespace LetsFest.Web.Migrations
                     b.ToTable("EventParticipation");
                 });
 
-            modelBuilder.Entity("LetsFest.Data.Dto.EventRole", b =>
+            modelBuilder.Entity("LetsFest.Data.Entity.EventRole", b =>
                 {
                     b.Property<short>("Id")
                         .ValueGeneratedOnAdd()
@@ -108,7 +108,7 @@ namespace LetsFest.Web.Migrations
                     b.ToTable("EventRole");
                 });
 
-            modelBuilder.Entity("LetsFest.Data.Dto.Location", b =>
+            modelBuilder.Entity("LetsFest.Data.Entity.Location", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -362,9 +362,9 @@ namespace LetsFest.Web.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("LetsFest.Data.Dto.Event", b =>
+            modelBuilder.Entity("LetsFest.Data.Entity.Event", b =>
                 {
-                    b.HasOne("LetsFest.Data.Dto.Location", null)
+                    b.HasOne("LetsFest.Data.Entity.Location", null)
                         .WithMany("Events")
                         .HasForeignKey("LocationId");
                 });
@@ -420,7 +420,7 @@ namespace LetsFest.Web.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("LetsFest.Data.Dto.Location", b =>
+            modelBuilder.Entity("LetsFest.Data.Entity.Location", b =>
                 {
                     b.Navigation("Events");
                 });

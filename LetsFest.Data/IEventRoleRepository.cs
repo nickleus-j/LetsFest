@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using LetsFest.Data.Dto;
+using LetsFest.Data.Entity;
 
 namespace LetsFest.Data
 {

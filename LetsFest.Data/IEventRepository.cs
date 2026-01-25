@@ -1,4 +1,4 @@
-﻿using LetsFest.Data.Dto;
+﻿using LetsFest.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using LetsFest.Data;
-using LetsFest.Data.Dto;
+using LetsFest.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 namespace LetsFest.Mysql
 {

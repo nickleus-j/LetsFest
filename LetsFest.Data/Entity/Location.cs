@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace LetsFest.Data.Dto
+namespace LetsFest.Data.Entity
 {
     public class Location
     {

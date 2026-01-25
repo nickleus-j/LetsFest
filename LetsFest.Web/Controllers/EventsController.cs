@@ -1,4 +1,4 @@
-﻿using LetsFest.Data.Dto;
+﻿using LetsFest.Data.Entity;
 using LetsFest.Mysql;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

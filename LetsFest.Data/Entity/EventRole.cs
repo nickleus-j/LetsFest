@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace LetsFest.Data.Dto
+namespace LetsFest.Data.Entity
 {
     [Table("EventRole")]
     public class EventRole
