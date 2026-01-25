@@ -20,5 +20,6 @@ namespace LetsFest.Mysql
         }
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<EventRole> EventRole { get; set; }
+        public virtual DbSet<EventParticipation> EventParticipation { get; set; }
     }
 }
