@@ -16,29 +16,6 @@ namespace LetsFest.Web.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "AppUser",
-                columns: table => new
-                {
-                    UserGuid = table.Column<string>(type: "varchar(45)", maxLength: 45, nullable: false),
-                    Type = table.Column<int>(type: "int", nullable: false),
-                    Username = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
-                    Email = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: false),
-                    EmailConfirmed = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    HasedPassword = table.Column<string>(type: "longtext", maxLength: 2147483647, nullable: false),
-                    Salt = table.Column<string>(type: "longtext", maxLength: 2147483647, nullable: false),
-                    OnLockout = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    LockOutEnd = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    AccessFailedCount = table.Column<short>(type: "smallint", nullable: false),
-                    RegisteredOn = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Active = table.Column<bool>(type: "tinyint(1)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppUser", x => x.UserGuid);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -80,22 +57,61 @@ namespace LetsFest.Web.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Event",
+                name: "EventParticipation",
                 columns: table => new
                 {
-                    EventID = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Title = table.Column<string>(type: "varchar(75)", maxLength: 75, nullable: false),
-                    Description = table.Column<string>(type: "longtext", nullable: false),
-                    Initiator = table.Column<long>(type: "bigint", nullable: true),
-                    inUse = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    isPublic = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    UserId = table.Column<string>(type: "varchar(40)", maxLength: 40, nullable: false),
+                    EventId = table.Column<long>(type: "bigint", nullable: false),
+                    RoleId = table.Column<short>(type: "smallint", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Event", x => x.EventID);
+                    table.PrimaryKey("PK_EventParticipation", x => x.Id);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "EventRole",
+                columns: table => new
+                {
+                    Id = table.Column<short>(type: "smallint", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    RoleName = table.Column<string>(type: "varchar(300)", maxLength: 300, nullable: false),
+                    inUse = table.Column<bool>(type: "tinyint(1)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventRole", x => x.Id);
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Location",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "longtext", nullable: true),
+                    AddressLine1 = table.Column<string>(type: "longtext", nullable: false),
+                    AddressLine2 = table.Column<string>(type: "longtext", nullable: true),
+                    City = table.Column<string>(type: "longtext", nullable: false),
+                    StateProvince = table.Column<string>(type: "longtext", nullable: true),
+                    PostalCode = table.Column<string>(type: "longtext", nullable: true),
+                    Country = table.Column<string>(type: "longtext", nullable: false),
+                    MaxCapacity = table.Column<int>(type: "int", nullable: true),
+                    IsAccessible = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Latitude = table.Column<double>(type: "double", nullable: true),
+                    Longitude = table.Column<double>(type: "double", nullable: true),
+                    VirtualUrl = table.Column<string>(type: "longtext", nullable: true),
+                    VirtualPlatform = table.Column<string>(type: "longtext", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Location", x => x.Id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -210,6 +226,33 @@ namespace LetsFest.Web.Migrations
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "Event",
+                columns: table => new
+                {
+                    EventID = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(type: "varchar(75)", maxLength: 75, nullable: false),
+                    Description = table.Column<string>(type: "longtext", nullable: false),
+                    InitiatorId = table.Column<string>(type: "varchar(40)", maxLength: 40, nullable: false),
+                    inUse = table.Column<bool>(type: "tinyint(1)", nullable: true),
+                    isPublic = table.Column<bool>(type: "tinyint(1)", nullable: true),
+                    ProposedStartDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    ProposedEndDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    LocationId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Event", x => x.EventID);
+                    table.ForeignKey(
+                        name: "FK_Event_Location_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Location",
+                        principalColumn: "Id");
+                })
+                .Annotation("MySQL:Charset", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -246,14 +289,16 @@ namespace LetsFest.Web.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Event_LocationId",
+                table: "Event",
+                column: "LocationId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "AppUser");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -273,10 +318,19 @@ namespace LetsFest.Web.Migrations
                 name: "Event");
 
             migrationBuilder.DropTable(
+                name: "EventParticipation");
+
+            migrationBuilder.DropTable(
+                name: "EventRole");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Location");
         }
     }
 }
