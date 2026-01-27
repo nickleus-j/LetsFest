@@ -13,6 +13,7 @@
 		<ProjectReference Include="..\letsFest.MysqlData\LetsFest.Mysql.csproj" />
 	</ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="16.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OAuth" Version="2.3.9" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="10.0.2" />

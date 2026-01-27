@@ -1,7 +1,11 @@
+using AutoMapper;
 using LetsFest.Mysql;
+using LetsFest.Web;
 using LetsFest.Web.Data;
+using LetsFest.Web.Mapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -19,6 +23,10 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<FestContext>();
 builder.Services.AddControllersWithViews();
 
+// AutoMapper configuration
+var config = new MapperConfiguration(cfg => { cfg.AddProfile<MappingProfile>(); },new LoggerFactory()); 
+IMapper mapper = config.CreateMapper(); // Store mapper in a static property or DI container
+AutoMapperConfig.Mapper = mapper;
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

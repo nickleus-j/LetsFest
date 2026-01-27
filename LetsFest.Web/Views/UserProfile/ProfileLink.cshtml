@@ -1,0 +1,3 @@
+﻿@model LetsFest.Data.Dto.UserProfileDto
+<img src="@Model.ProfilePicUrl" width="80" height="80"/>
+@Html.ActionLink(Model.GivenName, "Profile", new { profileId = Model.Id })

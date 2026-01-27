@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace LetsFest.Data.Entity
+namespace LetsFest.Data.Dto
 {
-    public class UserProfile
+    public class UserProfileDto
     {
+        public string ProfilePicUrl { get; set; }
+        public string UserName { get; set; }
         public int Id { get; set; }
         [DisplayName("Given Name")]
         public string? GivenName { get; set; }
@@ -23,6 +24,5 @@ namespace LetsFest.Data.Entity
         public string Bio { get; set; }
         [DisplayName("User Id")]
         public string UserId { get; set; }
-       
     }
 }

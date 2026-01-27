@@ -48,8 +48,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InitiatorId)
+            <td class="profile" data-profileId="@item.InitiatorId">
+                @* @Html.DisplayFor(modelItem => item.InitiatorId) *@
+               
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.inUse)
@@ -75,3 +76,41 @@
 }
     </tbody>
 </table>
+@section Scripts {
+    <script>
+            // Function to load the partial view
+    async function loadPartialView(userId) {
+        // Construct the URL to your controller action, including any query parameters
+        const url = `/UserProfile/ProfileLink?userId=${userId}`;
+
+        try {
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            // Get the response as text (which will be the HTML of the partial view)
+            const partialViewHtml = await response.text();
+
+            // Find the container element where you want to insert the partial view
+            const container = document.querySelector(`.profile[data-profileId="${userId}"]`);
+
+            if (container) {
+                // Insert the HTML into the container
+                container.innerHTML = partialViewHtml;
+            } else {
+                console.error('Container element not found!');
+            }
+
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+        }
+    }
+    window.onload = (event) => { // ES6 arrow function syntax
+                document.querySelectorAll("td.profile").forEach(function(item, index) {
+                    loadPartialView(item.getAttribute("data-profileId"));
+                });
+    };
+    </script>
+}
