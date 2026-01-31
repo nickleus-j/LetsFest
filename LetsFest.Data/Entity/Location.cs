@@ -12,7 +12,7 @@ namespace LetsFest.Data.Entity
 
         [Required]
         [StringLength(100)]
-        public string Name { get; set; } // e.g., "Grand Ballroom" or "Main Stage"
+        public string Name { get; set; }
 
         public string? Description { get; set; }
 
@@ -29,7 +29,7 @@ namespace LetsFest.Data.Entity
 
         // Capacity & Logistics
         public int? MaxCapacity { get; set; }
-        public bool IsAccessible { get; set; } // Wheelchair access, etc.
+        public bool IsAccessible { get; set; } 
 
         // Geospatial (Great for Map integrations)
         public double? Latitude { get; set; }

@@ -1,4 +1,6 @@
-﻿using LetsFest.Data.Entity;
+﻿using AutoMapper;
+using LetsFest.Data.Dto;
+using LetsFest.Data.Entity;
 using LetsFest.Mysql;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -76,15 +78,15 @@ namespace LetsFest.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EventID,Title,Description,InitiatorId,inUse,isPublic,ProposedStartDateTime,ProposedEndDateTime,CreatedOn")] Event @event)
+        public async Task<IActionResult> Create([Bind("EventID,Title,Description,InitiatorId,inUse,isPublic,ProposedStartDateTime,ProposedEndDateTime,CreatedOn")] EventCreateEditDto dto)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(@event);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(@event);
+            EfWorkUnit efWorkUnit = new EfWorkUnit(_context);
+            var dbEvent = AutoMapperConfig.Mapper.Map<Event>(dto);
+            dbEvent.CreatedOn = DateTime.UtcNow;
+            dbEvent.InitiatorId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            efWorkUnit.EventRepository.Add(dbEvent);
+            efWorkUnit.Complete();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Events/Edit/5

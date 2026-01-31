@@ -11,6 +11,7 @@ namespace LetsFest.Web.Mapper
                 // Example of explicit mapping if names didn't match:
                 // .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email))
                 .ReverseMap(); // Allows mapping DTO back to Entity
+            CreateMap<Event,EventCreateEditDto>().ReverseMap();
         }
     }
 }
