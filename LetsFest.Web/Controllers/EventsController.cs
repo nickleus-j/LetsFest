@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Humanizer;
 using LetsFest.Data.Dto;
 using LetsFest.Data.Entity;
 using LetsFest.Mysql;
@@ -97,12 +98,13 @@ namespace LetsFest.Web.Controllers
                 return NotFound();
             }
 
-            var @event = await _context.Event.FindAsync(id);
-            if (@event == null)
+            EfWorkUnit efWorkUnit = new EfWorkUnit(_context);
+            var dbEvent = efWorkUnit.EventRepository.SingleOrDefault(e => e.EventID == id);
+            if (dbEvent == null)
             {
                 return NotFound();
             }
-            return View(@event);
+            return View(AutoMapperConfig.Mapper.Map<EventCreateEditDto>(dbEvent));
         }
 
         // POST: Events/Edit/5
@@ -110,34 +112,18 @@ namespace LetsFest.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("EventID,Title,Description,InitiatorId,inUse,isPublic,ProposedStartDateTime,ProposedEndDateTime,CreatedOn")] Event @event)
+        public async Task<IActionResult> Edit(long id, EventCreateEditDto dto)
         {
-            if (id != @event.EventID)
+            if (id != dto.EventID)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(@event);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EventExists(@event.EventID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(@event);
+            EfWorkUnit efWorkUnit = new EfWorkUnit(_context);
+            var dbEvent = efWorkUnit.EventRepository.SingleOrDefault(e=>e.EventID==dto.EventID);
+            AutoMapperConfig.Mapper.Map(dto,dbEvent);
+            efWorkUnit.Complete();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Events/Delete/5
