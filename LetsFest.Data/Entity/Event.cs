@@ -21,10 +21,10 @@ namespace LetsFest.Data.Entity
         public string InitiatorId { get; set; }
         [DefaultValue(true)]
         [DisplayName("In Use")]
-        public Nullable<bool> inUse { get; set; }
+        public bool inUse { get; set; }
         [DefaultValue(true)]
         [DisplayName("Is Public")]
-        public Nullable<bool> isPublic { get; set; }
+        public bool isPublic { get; set; }
         [DisplayName("Proposed Start Time")]
         public Nullable<System.DateTime> ProposedStartDateTime { get; set; } = DateTime.UtcNow.AddDays(1);
         [DisplayName("Proposed End Time")]
