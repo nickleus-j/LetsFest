@@ -13,7 +13,7 @@ namespace LetsFest.Data
 
         // This method was not in the videos, but I thought it would be useful to add.
         TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate);
-
+        Task<TEntity> SingleAsync(Expression<Func<TEntity, bool>> predicate);
         void Add(TEntity entity);
         void AddRange(IEnumerable<TEntity> entities);
 

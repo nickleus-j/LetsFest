@@ -37,7 +37,10 @@ namespace LetsFest.Mysql
         {
             return Context.Set<TEntity>().SingleOrDefault(predicate);
         }
-
+        public async Task<TEntity> SingleAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await Context.Set<TEntity>().SingleAsync(predicate);
+        }
         public void Add(TEntity entity)
         {
             Context.Set<TEntity>().Add(entity);

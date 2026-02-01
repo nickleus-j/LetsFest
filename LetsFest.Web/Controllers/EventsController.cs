@@ -3,6 +3,7 @@ using Humanizer;
 using LetsFest.Data.Dto;
 using LetsFest.Data.Entity;
 using LetsFest.Mysql;
+using LetsFest.Web.DataService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -19,10 +20,11 @@ namespace LetsFest.Web.Controllers
     public class EventsController : Controller
     {
         private readonly FestContext _context;
-
+        private EventService service;
         public EventsController(FestContext context)
         {
             _context = context;
+            service=new EventService(context);
         }
 
         // GET: Events
@@ -57,16 +59,7 @@ namespace LetsFest.Web.Controllers
             {
                 return NotFound();
             }
-
-            EfWorkUnit efWorkUnit = new EfWorkUnit(_context);
-            var dbEvent = efWorkUnit.EventRepository.SingleOrDefault(e => e.EventID == id);
-            if (dbEvent == null)
-            {
-                return NotFound();
-            }
-            var dto = AutoMapperConfig.Mapper.Map<EventCreateEditDto>(dbEvent);
-            UserProfile profile = await _context.UserProfile.SingleAsync(up => up.UserId == dto.InitiatorId);
-            dto.InitiatorName = profile.GivenName + " " + profile.Surname;
+            var dto = await service.GetEventDtoWithId(id.Value);
             return View(dto);
         }
 
@@ -99,16 +92,7 @@ namespace LetsFest.Web.Controllers
             {
                 return NotFound();
             }
-
-            EfWorkUnit efWorkUnit = new EfWorkUnit(_context);
-            var dbEvent = efWorkUnit.EventRepository.SingleOrDefault(e => e.EventID == id);
-            if (dbEvent == null)
-            {
-                return NotFound();
-            }
-            var dto = AutoMapperConfig.Mapper.Map<EventCreateEditDto>(dbEvent);
-            UserProfile profile = await _context.UserProfile.SingleAsync(up => up.UserId == dto.InitiatorId);
-            dto.InitiatorName= profile.GivenName +" "+profile.Surname;
+            var dto = await service.GetEventDtoWithId(id.Value);
             return View(dto);
         }
 
@@ -124,10 +108,7 @@ namespace LetsFest.Web.Controllers
                 return NotFound();
             }
 
-            EfWorkUnit efWorkUnit = new EfWorkUnit(_context);
-            var dbEvent = efWorkUnit.EventRepository.SingleOrDefault(e=>e.EventID==dto.EventID);
-            AutoMapperConfig.Mapper.Map(dto,dbEvent);
-            efWorkUnit.Complete();
+            await service.UpdateEventFromDto(dto);
             return RedirectToAction(nameof(Index));
         }
 
