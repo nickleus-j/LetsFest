@@ -14,7 +14,7 @@ namespace LetsFest.Data.Dto
         public string Title { get; set; }
         public string Description { get; set; }
         [StringLength(40)]
-        [DisplayName("Initiator")]
+        [DisplayName("InitiatorId")]
         public string InitiatorId { get; set; }
         [DefaultValue(true)]
         [DisplayName("In Use")]
@@ -28,5 +28,7 @@ namespace LetsFest.Data.Dto
         public Nullable<System.DateTime> ProposedEndDateTime { get; set; } = DateTime.UtcNow.AddDays(1).AddHours(1);
         [DisplayName("Created On")]
         public Nullable<System.DateTime> CreatedOn { get; set; } = DateTime.UtcNow;
+        [DisplayName("Initiator")]
+        public string InitiatorName { get; set; }
     }
 }

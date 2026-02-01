@@ -58,14 +58,16 @@ namespace LetsFest.Web.Controllers
                 return NotFound();
             }
 
-            var @event = await _context.Event
-                .FirstOrDefaultAsync(m => m.EventID == id);
-            if (@event == null)
+            EfWorkUnit efWorkUnit = new EfWorkUnit(_context);
+            var dbEvent = efWorkUnit.EventRepository.SingleOrDefault(e => e.EventID == id);
+            if (dbEvent == null)
             {
                 return NotFound();
             }
-
-            return View(@event);
+            var dto = AutoMapperConfig.Mapper.Map<EventCreateEditDto>(dbEvent);
+            UserProfile profile = await _context.UserProfile.SingleAsync(up => up.UserId == dto.InitiatorId);
+            dto.InitiatorName = profile.GivenName + " " + profile.Surname;
+            return View(dto);
         }
 
         // GET: Events/Create
@@ -104,7 +106,10 @@ namespace LetsFest.Web.Controllers
             {
                 return NotFound();
             }
-            return View(AutoMapperConfig.Mapper.Map<EventCreateEditDto>(dbEvent));
+            var dto = AutoMapperConfig.Mapper.Map<EventCreateEditDto>(dbEvent);
+            UserProfile profile = await _context.UserProfile.SingleAsync(up => up.UserId == dto.InitiatorId);
+            dto.InitiatorName= profile.GivenName +" "+profile.Surname;
+            return View(dto);
         }
 
         // POST: Events/Edit/5

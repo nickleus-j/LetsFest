@@ -1,12 +1,14 @@
-﻿@model LetsFest.Data.Dto.EventCreateEditDto
+﻿@using LetsFest.Web;
+@model LetsFest.Data.Dto.EventCreateEditDto
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = Resource.Edit;
 }
 
-<h1>Edit</h1>
+<h1>@Resource.Edit </h1>
 
 <h4>Event</h4>
+<p><label>@Resource.Initiator:</label> @Model.InitiatorName</p>
 <hr />
 <div class="row">
     <div class="col-md-4">
