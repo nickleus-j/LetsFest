@@ -1,13 +1,13 @@
-﻿@model IEnumerable<LetsFest.Data.Entity.Event>
+﻿@model IEnumerable<LetsFest.Data.Dto.EventCreateEditDto>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Events";
 }
 
-<h1>Listing</h1>
+<h1>@ViewData["Title"]</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-info">@Resource.AddNew @Resource.Event</a>
 </p>
 <table class="table">
     <thead>

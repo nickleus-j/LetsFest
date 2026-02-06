@@ -2,6 +2,7 @@
 using LetsFest.Data.Entity;
 using LetsFest.Mysql;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace LetsFest.Web.DataService
 {
@@ -28,6 +29,21 @@ namespace LetsFest.Web.DataService
             var dbEvent = await efWorkUnit.EventRepository.SingleAsync(e => e.EventID == dto.EventID);
             AutoMapperConfig.Mapper.Map(dto, dbEvent);
             return efWorkUnit.Complete();
+        }
+        public async Task<IList<EventCreateEditDto>> GetEventsOfUserAsync(ClaimsIdentity claimsIdentity)
+        {
+            // the principal identity is a claims identity.
+            // now we need to find the NameIdentifier claim
+            var userIdClaim = claimsIdentity.Claims
+                .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+
+            if (userIdClaim != null)
+            {
+                var userIdValue = userIdClaim.Value;
+            }
+            var result = await efWorkUnit.EventRepository.GetEventsOfUserAsync(userIdClaim.Value);
+            var dtoList = AutoMapperConfig.Mapper.Map<IList<EventCreateEditDto>>(result);
+            return dtoList;
         }
     }
 }

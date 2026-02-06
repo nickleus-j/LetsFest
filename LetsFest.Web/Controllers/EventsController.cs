@@ -34,16 +34,7 @@ namespace LetsFest.Web.Controllers
             var claimsIdentity = User.Identity as ClaimsIdentity;
             if (claimsIdentity != null)
             {
-                // the principal identity is a claims identity.
-                // now we need to find the NameIdentifier claim
-                var userIdClaim = claimsIdentity.Claims
-                    .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-
-                if (userIdClaim != null)
-                {
-                    var userIdValue = userIdClaim.Value;
-                }
-                return View(await efWorkUnit.EventRepository.GetEventsOfUserAsync(userIdClaim.Value));
+                return View(await service.GetEventsOfUserAsync(claimsIdentity));
             }
             return NotFound();
         }

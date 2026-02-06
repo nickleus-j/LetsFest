@@ -1,13 +1,10 @@
 ﻿@using LetsFest.Web;
 @model LetsFest.Data.Dto.EventCreateEditDto
 
-@{
-    ViewData["Title"] = Resource.Edit;
-}
 
 <h1>@Resource.Edit </h1>
 
-<h4>Event</h4>
+<h4>@Resource.Event</h4>
 <p><label>@Resource.Initiator:</label> @Model.InitiatorName</p>
 <hr />
 <div class="row">
@@ -60,7 +57,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn">@Resource.BackToList</a>
 </div>
 
 @section Scripts {
