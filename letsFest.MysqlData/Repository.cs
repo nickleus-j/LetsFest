@@ -27,7 +27,10 @@ namespace LetsFest.Mysql
         {
             return Context.Set<TEntity>().ToList();
         }
-
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            return await Context.Set<TEntity>().ToListAsync();
+        }
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
             return Context.Set<TEntity>().Where(predicate);

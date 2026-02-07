@@ -3,15 +3,22 @@ using LetsFest.Data.Entity;
 using LetsFest.Mysql;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
+using LetsFest.Web.DataService;
 
 namespace LetsFest.Web.Controllers
 {
     public class UserProfileController : Controller
     {
         private readonly FestContext _context;
+        private UserProfileService upService;
         public UserProfileController(FestContext context)
         {
             _context = context;
+            upService=new UserProfileService(context);
+        }
+        public async Task<JsonResult> searchUser(string name)
+        {
+            return Json(await upService.searchUsers(name));
         }
         public IActionResult ProfileLink(string userId)
         {

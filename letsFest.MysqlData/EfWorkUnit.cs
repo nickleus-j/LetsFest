@@ -12,11 +12,13 @@ namespace LetsFest.Mysql
         public IEventRoleRepository EventRoles { get; private set; }
 
         public IEventRepository EventRepository { get; private set; }
+        public IUserProfileRepository UserProfileRepository { get; private set; }
 
         public EfWorkUnit(FestContext context)
         {
             _context = context;
             EventRoles = new EventRoleRepository(_context);
+            UserProfileRepository = new UserProfileRepository(_context);
             EventRepository = new EventRepository(_context);
         }
         public int Complete()

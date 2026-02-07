@@ -13,19 +13,19 @@ namespace LetsFest.Mysql
         {
         }
 
-        public FestContext webContext
+        public FestContext festContext
         {
             get { return Context as FestContext; }
         }
         public async Task<IList<Event>> GetEventsOfFutureLocationAsync(int locationId)
         {
-            Location locations = await webContext.Location.Include(l=>l.Events).SingleAsync(l=>l.Id== locationId);
+            Location locations = await festContext.Location.Include(l=>l.Events).SingleAsync(l=>l.Id== locationId);
             return locations.Events.ToList();
         }
 
         public async Task<IList<Event>> GetEventsOfUserAsync(string userId)
         {
-            return await webContext.Event.Where(e => e.InitiatorId == userId).ToListAsync();
+            return await festContext.Event.Where(e => e.InitiatorId == userId).ToListAsync();
         }
     }
 }
