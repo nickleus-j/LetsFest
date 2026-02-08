@@ -25,6 +25,22 @@ namespace LetsFest.Web.DataService
 
             return dto;
         }
+        public int CreateFromDto(EventCreateEditDto dto,string InitiatorId)
+        {
+            var dbEvent = AutoMapperConfig.Mapper.Map<Event>(dto);
+            dbEvent.CreatedOn = DateTime.UtcNow;
+            dbEvent.InitiatorId = InitiatorId;
+            efWorkUnit.EventRepository.Add(dbEvent);
+            int creationResult= efWorkUnit.Complete();
+            EventParticipation ep = new EventParticipation { EventId = dbEvent.EventID
+                , RoleId = efWorkUnit.EventRoles.GetAll().First().Id
+                ,UserId=InitiatorId
+                ,CreatedOn= DateTime.UtcNow
+            };
+            efWorkUnit.EventParticipationRepository.Add(ep);
+            efWorkUnit.Complete();
+            return creationResult;
+        }
         public async Task<int> UpdateEventFromDto(EventCreateEditDto dto) {
             var dbEvent = await efWorkUnit.EventRepository.SingleAsync(e => e.EventID == dto.EventID);
             AutoMapperConfig.Mapper.Map(dto, dbEvent);

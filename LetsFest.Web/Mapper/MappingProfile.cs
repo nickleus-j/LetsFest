@@ -12,6 +12,7 @@ namespace LetsFest.Web.Mapper
                 // .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email))
                 .ReverseMap(); // Allows mapping DTO back to Entity
             CreateMap<Event,EventCreateEditDto>().ReverseMap();
+            CreateMap<EventParticipation,EventParticipationDto>().ReverseMap();
         }
     }
 }

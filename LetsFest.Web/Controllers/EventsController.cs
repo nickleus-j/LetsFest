@@ -62,17 +62,11 @@ namespace LetsFest.Web.Controllers
 
         // POST: Events/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EventID,Title,Description,InitiatorId,inUse,isPublic,ProposedStartDateTime,ProposedEndDateTime,CreatedOn")] EventCreateEditDto dto)
         {
-            EfWorkUnit efWorkUnit = new EfWorkUnit(_context);
-            var dbEvent = AutoMapperConfig.Mapper.Map<Event>(dto);
-            dbEvent.CreatedOn = DateTime.UtcNow;
-            dbEvent.InitiatorId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            efWorkUnit.EventRepository.Add(dbEvent);
-            efWorkUnit.Complete();
+            int result=service.CreateFromDto(dto, User.FindFirstValue(ClaimTypes.NameIdentifier));
             return RedirectToAction(nameof(Index));
         }
 

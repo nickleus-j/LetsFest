@@ -5,10 +5,8 @@ using System.Text;
 
 namespace LetsFest.Data
 {
-    public interface IEventRepository: IRepository<Event>
+    public interface IEventParticipationRepository : IRepository<EventParticipation>
     {
-        Task<IList<Event>> GetEventsOfUserAsync(string userId);
-        Task<IList<Event>> GetEventsOfFutureLocationAsync(int locationId);
         Task<IList<EventParticipation>> GetEventParticipationOfUserAsync(long eventId);
     }
 }
