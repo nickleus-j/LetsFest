@@ -20,7 +20,7 @@ namespace LetsFest.Web.Controllers
         [HttpGet("{eventId}")]
         public async Task<JsonResult> GetById(long eventId)
         {
-            EfWorkUnit efWorkUnit = new EfWorkUnit(_context);
+            EfUnitOfWork efWorkUnit = new EfUnitOfWork(_context);
             var ep= await efWorkUnit.EventRepository.GetEventParticipationOfUserAsync(eventId);
             return Json(AutoMapperConfig.Mapper.Map<IList<EventParticipationDto>>(ep)); 
         }

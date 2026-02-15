@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LetsFest.Data
 {
-    public interface IDataWorkUnit
+    public interface IDataUnitOfWork
     {
         int Complete();
         IEventRoleRepository EventRoles { get; }

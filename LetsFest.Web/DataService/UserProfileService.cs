@@ -6,11 +6,11 @@ namespace LetsFest.Web.DataService
     public class UserProfileService
     {
         private readonly FestContext _context;
-        private EfWorkUnit efWorkUnit;
+        private EfUnitOfWork efWorkUnit;
         public UserProfileService(FestContext context)
         {
             _context = context;
-            efWorkUnit = new EfWorkUnit(_context);
+            efWorkUnit = new EfUnitOfWork(_context);
         }
         public async Task<IList<UserProfileDto>> searchUsers(string searchTerm)
         {

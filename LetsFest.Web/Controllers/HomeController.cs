@@ -25,7 +25,7 @@ namespace LetsFest.Web.Controllers
         }
         public ActionResult CheckRoles()
         {
-            EfWorkUnit efWorkUnit = new EfWorkUnit(dataContext);
+            EfUnitOfWork efWorkUnit = new EfUnitOfWork(dataContext);
             return View(efWorkUnit.EventRoles.GetStaffRoles());
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

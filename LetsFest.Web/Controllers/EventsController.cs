@@ -30,7 +30,7 @@ namespace LetsFest.Web.Controllers
         // GET: Events
         public async Task<IActionResult> Index()
         {
-            EfWorkUnit efWorkUnit = new EfWorkUnit(_context);
+            EfUnitOfWork efWorkUnit = new EfUnitOfWork(_context);
             var claimsIdentity = User.Identity as ClaimsIdentity;
             if (claimsIdentity != null)
             {
@@ -40,7 +40,7 @@ namespace LetsFest.Web.Controllers
         }
         public async Task<IActionResult> EventsIn(int locationId)
         {
-            EfWorkUnit efWorkUnit = new EfWorkUnit(_context);
+            EfUnitOfWork efWorkUnit = new EfUnitOfWork(_context);
             return View("Index", await efWorkUnit.EventRepository.GetEventsOfFutureLocationAsync(locationId));
         }
         // GET: Events/Details/5

@@ -59,13 +59,13 @@
                 @Html.DisplayFor(modelItem => item.isPublic)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProposedStartDateTime)
+                    @item.ProposedStartDateTime?.ToString("g")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProposedEndDateTime)
+                    @item.ProposedEndDateTime?.ToString("g")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedOn)
+                    @item.CreatedOn?.ToLocalTime().ToString("g")
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.EventID">Edit</a> |

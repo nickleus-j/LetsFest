@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LetsFest.Mysql
 {
-    public class EfWorkUnit : IDataWorkUnit
+    public class EfUnitOfWork : IDataUnitOfWork
     {
         private readonly FestContext _context;
         public IEventRoleRepository EventRoles { get; private set; }
@@ -15,7 +15,7 @@ namespace LetsFest.Mysql
         public IEventParticipationRepository EventParticipationRepository { get; private set; }
         public IUserProfileRepository UserProfileRepository { get; private set; }
 
-        public EfWorkUnit(FestContext context)
+        public EfUnitOfWork(FestContext context)
         {
             _context = context;
             EventRoles = new EventRoleRepository(_context);

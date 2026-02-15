@@ -9,11 +9,11 @@ namespace LetsFest.Web.DataService
     public class EventService
     {
         private readonly FestContext _context;
-        private EfWorkUnit efWorkUnit;
+        private EfUnitOfWork efWorkUnit;
         public EventService(FestContext context)
         {
             _context=context;
-            efWorkUnit = new EfWorkUnit(_context);
+            efWorkUnit = new EfUnitOfWork(_context);
         }
         public async Task<EventCreateEditDto> GetEventDtoWithId(long id)
         {
