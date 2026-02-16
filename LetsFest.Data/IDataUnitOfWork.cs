@@ -9,5 +9,6 @@ namespace LetsFest.Data
         int Complete();
         IEventRoleRepository EventRoles { get; }
         IEventRepository EventRepository { get; }
+        IEventParticipationRepository EventParticipationRepository { get; }
     }
 }

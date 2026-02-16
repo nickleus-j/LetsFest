@@ -1,4 +1,5 @@
 using AutoMapper;
+using LetsFest.Data;
 using LetsFest.Mysql;
 using LetsFest.Web;
 using LetsFest.Web.Data;
@@ -22,7 +23,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<FestContext>();
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddTransient<IDataUnitOfWork, EfUnitOfWork>();
 // AutoMapper configuration
 var config = new MapperConfiguration(cfg => { cfg.AddProfile<MappingProfile>(); },new LoggerFactory()); 
 IMapper mapper = config.CreateMapper(); // Store mapper in a static property or DI container

@@ -27,7 +27,7 @@ namespace LetsFest.Mysql
         {
             return await festContext.Event.Where(e => e.InitiatorId == userId).ToListAsync();
         }
-        public async Task<IList<EventParticipation>> GetEventParticipationOfUserAsync(long eventId)
+        public async Task<IList<EventParticipation>> GetEventParticipationOfEventAsync(long eventId)
         {
             return await festContext.EventParticipation.Where(ep=>ep.EventId==eventId).ToListAsync();
         }

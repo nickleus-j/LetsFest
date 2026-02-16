@@ -1,4 +1,27 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿
+async function SendData(url, method, data) {
+    try {
+        const response = await fetch(url, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json' // Indicate the content type
+            },
+            body: JSON.stringify(data)
+        });
 
-// Write your JavaScript code.
+        // Check if the request was successful
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        // Parse the JSON response
+        const responseData = await response.json();
+        console.log('Success:', responseData);
+        return responseData;
+
+    } catch (error) {
+        console.error('Error:', error);
+        // You can handle the error further or rethrow it
+        throw error;
+    }
+}

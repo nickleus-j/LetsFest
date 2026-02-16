@@ -9,6 +9,6 @@ namespace LetsFest.Data
     {
         Task<IList<Event>> GetEventsOfUserAsync(string userId);
         Task<IList<Event>> GetEventsOfFutureLocationAsync(int locationId);
-        Task<IList<EventParticipation>> GetEventParticipationOfUserAsync(long eventId);
+        Task<IList<EventParticipation>> GetEventParticipationOfEventAsync(long eventId);
     }
 }
