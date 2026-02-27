@@ -50,14 +50,14 @@
                 <span asp-validation-for="CreatedOn" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="@Resource.Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index" class="btn">Back to List</a>
+    <a asp-action="Index" class="btn">@Resource.BackToList</a>
 </div>
 
 @section Scripts {

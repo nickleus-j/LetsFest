@@ -107,7 +107,7 @@
             console.error('There was a problem with the fetch operation:', error);
         }
     }
-    window.onload = (event) => { // ES6 arrow function syntax
+    window.onload = (event) => { 
                 document.querySelectorAll("td.profile").forEach(function(item, index) {
                     loadPartialView(item.getAttribute("data-profileId"),index);
                 });
